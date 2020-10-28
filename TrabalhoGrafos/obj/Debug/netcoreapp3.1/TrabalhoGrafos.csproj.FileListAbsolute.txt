@@ -1,0 +1,13 @@
+C:\Users\Ivory\Desktop\grafos\TrabalhoGrafos\TrabalhoGrafos\bin\Debug\netcoreapp3.1\TrabalhoGrafos.exe
+C:\Users\Ivory\Desktop\grafos\TrabalhoGrafos\TrabalhoGrafos\bin\Debug\netcoreapp3.1\TrabalhoGrafos.deps.json
+C:\Users\Ivory\Desktop\grafos\TrabalhoGrafos\TrabalhoGrafos\bin\Debug\netcoreapp3.1\TrabalhoGrafos.runtimeconfig.json
+C:\Users\Ivory\Desktop\grafos\TrabalhoGrafos\TrabalhoGrafos\bin\Debug\netcoreapp3.1\TrabalhoGrafos.runtimeconfig.dev.json
+C:\Users\Ivory\Desktop\grafos\TrabalhoGrafos\TrabalhoGrafos\bin\Debug\netcoreapp3.1\TrabalhoGrafos.dll
+C:\Users\Ivory\Desktop\grafos\TrabalhoGrafos\TrabalhoGrafos\bin\Debug\netcoreapp3.1\TrabalhoGrafos.pdb
+C:\Users\Ivory\Desktop\grafos\TrabalhoGrafos\TrabalhoGrafos\obj\Debug\netcoreapp3.1\TrabalhoGrafos.csprojAssemblyReference.cache
+C:\Users\Ivory\Desktop\grafos\TrabalhoGrafos\TrabalhoGrafos\obj\Debug\netcoreapp3.1\TrabalhoGrafos.AssemblyInfoInputs.cache
+C:\Users\Ivory\Desktop\grafos\TrabalhoGrafos\TrabalhoGrafos\obj\Debug\netcoreapp3.1\TrabalhoGrafos.AssemblyInfo.cs
+C:\Users\Ivory\Desktop\grafos\TrabalhoGrafos\TrabalhoGrafos\obj\Debug\netcoreapp3.1\TrabalhoGrafos.csproj.CoreCompileInputs.cache
+C:\Users\Ivory\Desktop\grafos\TrabalhoGrafos\TrabalhoGrafos\obj\Debug\netcoreapp3.1\TrabalhoGrafos.dll
+C:\Users\Ivory\Desktop\grafos\TrabalhoGrafos\TrabalhoGrafos\obj\Debug\netcoreapp3.1\TrabalhoGrafos.pdb
+C:\Users\Ivory\Desktop\grafos\TrabalhoGrafos\TrabalhoGrafos\obj\Debug\netcoreapp3.1\TrabalhoGrafos.genruntimeconfig.cache
