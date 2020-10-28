@@ -29,7 +29,7 @@ namespace TrabalhoGrafos
 
                 // Do 2º vértice pra frente, adicionar para todos vértice uma adjacencia 
                 //com o primeiro vértice
-                if (i >= 1)
+                if (i > 1)
                 {
                     grafo[i].Adjacencias.Add(grafo[1]);
                 }
@@ -40,10 +40,17 @@ namespace TrabalhoGrafos
         {
             foreach (var vertice in grafo)
             {
-                foreach (var adjacencia in vertice.Adjacencias)
+                Console.WriteLine($"Vértice: {vertice.Nome}");
+                if (vertice.Adjacencias.Count == 0)
                 {
-                    Console.WriteLine($"Vértice: {vertice.Nome}");
-                    Console.WriteLine($"Adjacencias: {adjacencia.Nome} \n");
+                    Console.WriteLine($"Adjacencias: {vertice.Nome} não possui vértices adjacentes!\n");
+                }
+                else
+                {
+                    foreach (var adjacencia in vertice.Adjacencias)
+                    {
+                        Console.WriteLine($"Adjacencias: {adjacencia.Nome} \n");
+                    }
                 }
             }
         }
