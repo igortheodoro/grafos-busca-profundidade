@@ -35,6 +35,18 @@ namespace TrabalhoGrafos
                 }
             }
         }
+
+        public static void VerGrafo(List<Vertice> grafo)
+        {
+            foreach (var vertice in grafo)
+            {
+                foreach (var adjacencia in vertice.Adjacencias)
+                {
+                    Console.WriteLine($"Vértice: {vertice.Nome}");
+                    Console.WriteLine($"Adjacencias: {adjacencia.Nome} \n");
+                }
+            }
+        }
         static void Main(string[] args)
         {
             var opcao = Menu();
@@ -48,14 +60,7 @@ namespace TrabalhoGrafos
             {
                 if (opcao == 1)
                 {
-                    foreach (var vertice in grafo)
-                    {
-                        foreach (var adjacencia in vertice.Adjacencias)
-                        {
-                            Console.WriteLine($"Vértice: {vertice.Nome}");
-                            Console.WriteLine($"Adjacencias: {adjacencia.Nome} \n");
-                        }
-                    }
+                    VerGrafo(grafo);
                 }
                 else if (opcao == 2)
                 {
