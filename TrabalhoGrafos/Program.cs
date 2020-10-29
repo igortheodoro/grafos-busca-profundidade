@@ -33,16 +33,14 @@ namespace TrabalhoGrafos
                 });
             }
 
-            for (int i = 1; i < 9; i++)
-            {
-                for (int j = 1; j < 9; j++)
-                {
-                    if (i != j)
-                    {
-                        grafo[i].Adjacencias.Add(grafo[j]);
-                    }
-                }
-            }
+            grafo[1].Adjacencias.Add(grafo[2]);
+            grafo[1].Adjacencias.Add(grafo[3]);
+            grafo[1].Adjacencias.Add(grafo[4]);
+            grafo[1].Adjacencias.Add(grafo[5]);
+
+            grafo[4].Adjacencias.Add(grafo[6]);
+            grafo[4].Adjacencias.Add(grafo[7]);
+            grafo[4].Adjacencias.Add(grafo[8]);
 
         }
 
@@ -134,7 +132,7 @@ namespace TrabalhoGrafos
         public static Vertice BuscaProfundidade(Vertice vertices, string nomeDoVertice)
         {
             Vertice encontrado = null;
-
+            pilha.Push(vertices);
             if (vertices.Nome == nomeDoVertice)
             {
                 return vertices;
@@ -143,11 +141,11 @@ namespace TrabalhoGrafos
             {
                 foreach (var vertice in vertices.Adjacencias)
                 {
-                    pilha.Push(vertice);
 
                     if (vertice.Adjacencias.Count == 0)
                     {
                         pilha.Pop();
+                        visitados.Add(vertice);
                         encontrado = BuscaProfundidade(pilha.Peek(), nomeDoVertice);
                     }
                     else if(!visitados.Contains(vertice))
