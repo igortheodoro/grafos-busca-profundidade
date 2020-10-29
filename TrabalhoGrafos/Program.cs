@@ -12,7 +12,7 @@ namespace TrabalhoGrafos
         private static int Menu()
         {
             Console.WriteLine("\n[1] - Ver grafo");
-            Console.WriteLine("[2] - Buscar vértice");
+            Console.WriteLine("[2] - Verificar vértice existente");
             Console.WriteLine("[3] - Adicionar vértice");
             Console.WriteLine("[4] - Remover vértice");
             Console.WriteLine("[5] - Adicionar aresta");
@@ -70,8 +70,47 @@ namespace TrabalhoGrafos
             Console.Write("\nDigite nome do vértice que deseja remover: ");
             var nome = Console.ReadLine();
 
-            
+            var vertice = EncontraVertice(grafo, nome);
 
+            if (vertice == null)
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nImpossível remover um vértice não existente!");
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
+            else
+            {
+                grafo.Remove(vertice);
+
+                foreach (var v in grafo)
+                {
+                    v.Adjacencias.RemoveAll(v => v.Nome == nome);
+                }
+
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nVértice removido!");
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
+        }
+
+        public static void VerificarVertice(List<Vertice> grafo)
+        {
+            Console.Write("\nDigite o nome do vértice que deseja encontrar: ");
+            var nome = Console.ReadLine();
+
+            var vertice = EncontraVertice(grafo, nome);
+            if (vertice != null)
+            {
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.WriteLine("\n Vértice existente!");
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
+            else
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n Vértice não existente!");
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
         }
 
         public static Vertice EncontraVertice(List<Vertice> grafo, string nome)
@@ -102,13 +141,8 @@ namespace TrabalhoGrafos
             }
             else
             {
-                if (vertices.Adjacencias.Count == 0)
-                {
-                    visitados.Add(vertices);
-                }
                 foreach (var vertice in vertices.Adjacencias)
                 {
-
                     pilha.Push(vertice);
 
                     if (vertice.Adjacencias.Count == 0)
@@ -156,22 +190,7 @@ namespace TrabalhoGrafos
                 }
                 else if (opcao == 2)
                 {
-                    Console.Write("\nDigite o nome do vértice que deseja encontrar: ");
-                    var nome = Console.ReadLine();
-
-                    var vertice = EncontraVertice(grafo, nome);
-                    if (vertice != null)
-                    {
-                        Console.BackgroundColor = ConsoleColor.Green;
-                        Console.WriteLine("\n Vértice existente!");
-                        Console.BackgroundColor = ConsoleColor.Black;
-                    }
-                    else
-                    {
-                        Console.BackgroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\n Vértice não existente!");
-                        Console.BackgroundColor = ConsoleColor.Black;
-                    }
+                    VerificarVertice(grafo);
                 }
                 else if (opcao == 3)
                 {
@@ -179,7 +198,7 @@ namespace TrabalhoGrafos
                 }
                 else if (opcao == 4)
                 {
-
+                    RemoverVertice(grafo);
                 }
                 else if (opcao == 5)
                 {
