@@ -6,6 +6,9 @@ namespace TrabalhoGrafos
 {
     class Program
     {
+        public static List<Vertice> visitados = new List<Vertice>();
+        public static Stack<Vertice> pilha = new Stack<Vertice>();
+
         private static int Menu()
         {
             Console.WriteLine("\n[1] - Ver grafo");
@@ -21,21 +24,26 @@ namespace TrabalhoGrafos
 
         public static void PreencherGrafo(List<Vertice> grafo)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 grafo.Add(new Vertice()
                 {
                     Nome = $"V{i}",
                     Adjacencias = new List<Vertice>()
                 });
+            }
 
-                // Do 2º vértice pra frente, adicionar para todos vértice uma adjacencia 
-                //com o primeiro vértice
-                if (i > 1)
+            for (int i = 1; i < 9; i++)
+            {
+                for (int j = 1; j < 9; j++)
                 {
-                    grafo[i].Adjacencias.Add(grafo[1]);
+                    if (i != j)
+                    {
+                        grafo[i].Adjacencias.Add(grafo[j]);
+                    }
                 }
             }
+
         }
 
         public static void VerGrafo(List<Vertice> grafo)
@@ -68,39 +76,50 @@ namespace TrabalhoGrafos
 
         public static Vertice EncontraVertice(List<Vertice> grafo, string nome)
         {
-            //var pilha = new Stack<Vertice>();
-            var verticesVisitados = new List<Vertice>();
-
-            Vertice x = null;
-
+            Vertice encontrado = new Vertice();
             foreach (var vertice in grafo)
             {
-                if (!verticesVisitados.Contains(vertice))
+                encontrado = BuscaProfundidade(vertice, nome);
+
+                if (encontrado != null)
                 {
-                   x = VisitaVertice(grafo, vertice, verticesVisitados, nome);
+                    return encontrado;
                 }
             }
 
-            return x;
+            visitados = new List<Vertice>();
+            pilha = new Stack<Vertice>();
+            return encontrado;
         }
 
-        public static Vertice VisitaVertice(List<Vertice> grafo, Vertice vertice, List<Vertice> verticesVisitados , string nome)
+        public static Vertice BuscaProfundidade(Vertice vertices, string nomeDoVertice)
         {
             Vertice encontrado = null;
 
-            if (vertice.Nome == nome)
+            if (vertices.Nome == nomeDoVertice)
             {
-                return vertice;
+                return vertices;
             }
             else
             {
-                foreach (var v in vertice.Adjacencias)
+                if (vertices.Adjacencias.Count == 0)
                 {
-                    verticesVisitados.Add(v);
+                    visitados.Add(vertices);
+                }
+                foreach (var vertice in vertices.Adjacencias)
+                {
 
-                    if (encontrado == null && verticesVisitados.IndexOf(vertice) < 0 && verticesVisitados.Count < grafo.Count)
+                    pilha.Push(vertice);
+
+                    if (vertice.Adjacencias.Count == 0)
                     {
-                        encontrado = VisitaVertice(grafo, v, verticesVisitados, nome);
+                        pilha.Pop();
+                        encontrado = BuscaProfundidade(pilha.Peek(), nomeDoVertice);
+                    }
+                    else if(!visitados.Contains(vertice))
+                    {
+                        visitados.Add(vertice);
+                        encontrado = BuscaProfundidade(vertice, nomeDoVertice);
                     }
                 }
 
