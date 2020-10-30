@@ -61,6 +61,7 @@ namespace TrabalhoGrafos
             {
                 if (!linha.Contains(" ") && !linha.Contains("-"))
                 {
+                    // Criar as instâncias dos vértices com cada nome
                     grafo.Add(new Vertice()
                     {
                         Adjacencias = new List<Vertice>(),
@@ -69,8 +70,10 @@ namespace TrabalhoGrafos
                 }
                 else if(linha.Contains(" "))
                 {
+                    // Expressão regular para pegar separadamente o nome cada vértice no texto e suas adjacencias
                     var vertices = Regex.Matches(linha, @"(.*?) ");
 
+                    // Adicionar para cada instância de vértice suas adjacencias (se existir)
                     for (int i = 0; i < vertices.Count; i++)
                     {
                         if (i != 0)
@@ -88,16 +91,17 @@ namespace TrabalhoGrafos
         {
             foreach (var vertice in grafo)
             {
+                Console.WriteLine("\n");
                 Console.WriteLine($"Vértice: {vertice.Nome}");
                 if (vertice.Adjacencias.Count == 0)
                 {
-                    Console.WriteLine($"Adjacencias: {vertice.Nome} não há vértices adjacentes!\n");
+                    Console.WriteLine($"Adjacencias: Nenhuma");
                 }
                 else
                 {
                     foreach (var adjacencia in vertice.Adjacencias)
                     {
-                        Console.WriteLine($"Adjacencias: {adjacencia.Nome} \n");
+                        Console.WriteLine($"Adjacencias: {adjacencia.Nome}");
                     }
                 }
             }
