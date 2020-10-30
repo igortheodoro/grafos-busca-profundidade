@@ -9,7 +9,6 @@ namespace TrabalhoGrafos
     class Program
     {
         public static List<Vertice> visitados = new List<Vertice>();
-        public static Stack<Vertice> pilha = new Stack<Vertice>();
 
         private static int Menu()
         {
@@ -166,14 +165,12 @@ namespace TrabalhoGrafos
             }
 
             visitados = new List<Vertice>();
-            pilha = new Stack<Vertice>();
             return encontrado;
         }
 
         public static Vertice BuscaProfundidade(Vertice vertices, string nomeDoVertice)
         {
             Vertice encontrado = null;
-            pilha.Push(vertices);
 
             if (vertices.Nome == nomeDoVertice)
             {
@@ -183,15 +180,7 @@ namespace TrabalhoGrafos
             {
                 foreach (var vertice in vertices.Adjacencias)
                 {
-
-                    if (vertice.Adjacencias.Count == 0 && !visitados.Contains(vertice))
-                    {
-                        pilha.Pop();
-                        visitados.Add(vertice);
-
-                        encontrado = BuscaProfundidade(pilha.Peek(), nomeDoVertice);
-                    }
-                    else if (!visitados.Contains(vertice))
+                    if (!visitados.Contains(vertice))
                     {
                         visitados.Add(vertice);
                         encontrado = BuscaProfundidade(vertice, nomeDoVertice);
