@@ -47,8 +47,22 @@ namespace TrabalhoGrafos
 
             var vertice1 = EncontraVertice(grafo, nomeVertice1);
             var vertice2 = EncontraVertice(grafo, nomeVertice2);
-            vertice1.Adjacencias.Remove(vertice2);
-            vertice2.Adjacencias.Remove(vertice2);
+
+            if (vertice1 == null || vertice2 == null || !vertice1.Adjacencias.Contains(vertice2))
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nImpossível remover uma aresta que não existe!");
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
+            else
+            {
+                vertice1.Adjacencias.Remove(vertice2);
+                vertice2.Adjacencias.Remove(vertice2);
+
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nRemovido com sucesso!");
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
         }
 
         public static void PreencherGrafo(List<Vertice> grafo)
