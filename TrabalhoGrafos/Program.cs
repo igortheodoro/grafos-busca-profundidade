@@ -67,9 +67,9 @@ namespace TrabalhoGrafos
                         Nome = linha
                     });
                 }
-                else if(!linha.Contains("-"))
+                else if(linha.Contains(" "))
                 {
-                    var vertices = Regex.Matches(linha, @"\w{2} ");
+                    var vertices = Regex.Matches(linha, @"(.*?) ");
 
                     for (int i = 0; i < vertices.Count; i++)
                     {
@@ -120,6 +120,8 @@ namespace TrabalhoGrafos
             {
                 grafo.Remove(vertice);
 
+                // Esse loop é necessário porque mesmo a instância sendo removida
+                // os objetos que apontavam pra essa instância continuam apontando
                 foreach (var v in grafo)
                 {
                     v.Adjacencias.RemoveAll(v => v.Nome == nome);
@@ -210,8 +212,6 @@ namespace TrabalhoGrafos
 
             PreencherGrafo(grafo);
 
-            // Preencher o grafo automaticamente, apenas para testes
-            //PreencherGrafo(grafo);
 
             while (opcao < 7)
             {
