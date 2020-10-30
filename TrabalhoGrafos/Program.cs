@@ -20,7 +20,7 @@ namespace TrabalhoGrafos
             Console.WriteLine("[5] - Adicionar aresta");
             Console.WriteLine("[6] - Remover aresta");
             Console.WriteLine("[7] - Sair");
-            Console.Write("\nDigite o número correspondente a opção que deseja:");
+            Console.Write("\nDigite o número correspondente a opção que deseja: ");
             return int.Parse(Console.ReadLine());
         }
 
@@ -174,6 +174,7 @@ namespace TrabalhoGrafos
         {
             Vertice encontrado = null;
             pilha.Push(vertices);
+
             if (vertices.Nome == nomeDoVertice)
             {
                 return vertices;
@@ -183,10 +184,11 @@ namespace TrabalhoGrafos
                 foreach (var vertice in vertices.Adjacencias)
                 {
 
-                    if (vertice.Adjacencias.Count == 0)
+                    if (vertice.Adjacencias.Count == 0 && !visitados.Contains(vertice))
                     {
                         pilha.Pop();
                         visitados.Add(vertice);
+
                         encontrado = BuscaProfundidade(pilha.Peek(), nomeDoVertice);
                     }
                     else if (!visitados.Contains(vertice))
@@ -195,7 +197,6 @@ namespace TrabalhoGrafos
                         encontrado = BuscaProfundidade(vertice, nomeDoVertice);
                     }
                 }
-
                 return encontrado;
             }
         }
