@@ -33,8 +33,22 @@ namespace TrabalhoGrafos
 
             var vertice1 = EncontraVertice(grafo, nomeVertice1);
             var vertice2 = EncontraVertice(grafo, nomeVertice2);
-            vertice1.Adjacencias.Add(vertice2);
-            vertice2.Adjacencias.Add(vertice2);
+
+            if (vertice1 == null || vertice2 == null || vertice1.Adjacencias.Contains(vertice2))
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nImpossível adicionar uma aresta que já é existente ou ainda não foi criado!");
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
+            else
+            {
+                vertice1.Adjacencias.Add(vertice2);
+                vertice2.Adjacencias.Add(vertice2);
+
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nAdicionado com sucesso!");
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
         }
 
         public static void RemoverAresta(List<Vertice> grafo)
