@@ -216,7 +216,6 @@ namespace TrabalhoGrafos
 
             PreencherGrafo(grafo);
 
-
             while (opcao < 7)
             {
                 if (opcao == 1)

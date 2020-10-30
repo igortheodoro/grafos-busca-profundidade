@@ -1,10 +1,9 @@
-V1
-V2
-V3
-V4
-V5
-V6
+Vertice1
+Vertice2
+Vertice3
+Vertice4
+Vertice5
+Vertice6
 -
-V1 V2 V3 V5
-V2 V3 V5 
-V6 V1 V2 
+Vertice1 Vertice2 Vertice5
+Vertice4 Vertice1 Vertice6
