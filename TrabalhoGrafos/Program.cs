@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace TrabalhoGrafos
 {
@@ -22,26 +24,65 @@ namespace TrabalhoGrafos
             return int.Parse(Console.ReadLine());
         }
 
+        public static void AdicionarAresta(List<Vertice> grafo)
+        {
+            Console.Write("\nDigite o nome vértice que deseja inserir aresta: ");
+            var nomeVertice1 = Console.ReadLine();
+
+            Console.Write($"\nDigite o nome do vértice que será adjacente ao vértice {nomeVertice1}: ");
+            var nomeVertice2 = Console.ReadLine();
+
+            var vertice1 = EncontraVertice(grafo, nomeVertice1);
+            var vertice2 = EncontraVertice(grafo, nomeVertice2);
+            vertice1.Adjacencias.Add(vertice2);
+            vertice2.Adjacencias.Add(vertice2);
+        }
+
+        public static void RemoverAresta(List<Vertice> grafo)
+        {
+            Console.Write("\nDigite o nome vértice que deseja remover aresta: ");
+            var nomeVertice1 = Console.ReadLine();
+
+            Console.Write($"\nDigite o nome do vértice seja adjacente ao vértice {nomeVertice1} que você deseja remover: ");
+            var nomeVertice2 = Console.ReadLine();
+
+            var vertice1 = EncontraVertice(grafo, nomeVertice1);
+            var vertice2 = EncontraVertice(grafo, nomeVertice2);
+            vertice1.Adjacencias.Remove(vertice2);
+            vertice2.Adjacencias.Remove(vertice2);
+        }
+
         public static void PreencherGrafo(List<Vertice> grafo)
         {
-            for (int i = 0; i < 10; i++)
+
+            var grafoTexto = new StreamReader(@"../../../grafo.txt");
+            string linha = null;
+
+            while ((linha = grafoTexto.ReadLine()) != null)
             {
-                grafo.Add(new Vertice()
+                if (!linha.Contains(" ") && !linha.Contains("-"))
                 {
-                    Nome = $"V{i}",
-                    Adjacencias = new List<Vertice>()
-                });
+                    grafo.Add(new Vertice()
+                    {
+                        Adjacencias = new List<Vertice>(),
+                        Nome = linha
+                    });
+                }
+                else if(!linha.Contains("-"))
+                {
+                    var vertices = Regex.Matches(linha, @"\w{2} ");
+
+                    for (int i = 0; i < vertices.Count; i++)
+                    {
+                        if (i != 0)
+                        {
+                            grafo.FirstOrDefault(v => v.Nome == vertices[0].Value.Replace(" ", ""))
+                                .Adjacencias
+                                .Add(grafo.FirstOrDefault(v => v.Nome == vertices[i].Value.Replace(" ", "")));
+                        }
+                    }
+                }
             }
-
-            grafo[1].Adjacencias.Add(grafo[2]);
-            grafo[1].Adjacencias.Add(grafo[3]);
-            grafo[1].Adjacencias.Add(grafo[4]);
-            grafo[1].Adjacencias.Add(grafo[5]);
-
-            grafo[4].Adjacencias.Add(grafo[6]);
-            grafo[4].Adjacencias.Add(grafo[7]);
-            grafo[4].Adjacencias.Add(grafo[8]);
-
         }
 
         public static void VerGrafo(List<Vertice> grafo)
@@ -148,7 +189,7 @@ namespace TrabalhoGrafos
                         visitados.Add(vertice);
                         encontrado = BuscaProfundidade(pilha.Peek(), nomeDoVertice);
                     }
-                    else if(!visitados.Contains(vertice))
+                    else if (!visitados.Contains(vertice))
                     {
                         visitados.Add(vertice);
                         encontrado = BuscaProfundidade(vertice, nomeDoVertice);
@@ -177,8 +218,10 @@ namespace TrabalhoGrafos
 
             var grafo = new List<Vertice>();
 
-            // Preencher o grafo automaticamente, apenas para testes
             PreencherGrafo(grafo);
+
+            // Preencher o grafo automaticamente, apenas para testes
+            //PreencherGrafo(grafo);
 
             while (opcao < 7)
             {
@@ -200,11 +243,11 @@ namespace TrabalhoGrafos
                 }
                 else if (opcao == 5)
                 {
-
+                    AdicionarAresta(grafo);
                 }
                 else
                 {
-
+                    RemoverAresta(grafo);
                 }
 
                 opcao = Menu();
