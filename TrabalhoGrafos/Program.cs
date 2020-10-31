@@ -87,7 +87,7 @@ namespace TrabalhoGrafos
 
             while ((linha = grafoTexto.ReadLine()) != null)
             {
-                if (!linha.Contains(" ") && !linha.Contains("-"))
+                if (!linha.Contains(" ") && linha.Length > 1)
                 {
                     // Criar as instâncias dos vértices com cada nome
                     grafo.Add(new Vertice()
@@ -96,21 +96,17 @@ namespace TrabalhoGrafos
                         Nome = linha
                     });
                 }
-                else if(linha.Contains(" "))
+                else if(linha.Contains(" ") && linha.Length > 1)
                 {
                     // Expressão regular para pegar separadamente o nome cada vértice no texto e suas adjacencias
+                    // É importante que no final de cada linha onde é setado as arestas tenha um espaço
                     var vertices = Regex.Matches(linha, @"(.*?) ");
 
-                    // Adicionar para cada instância de vértice suas adjacencias (se existir)
-                    for (int i = 0; i < vertices.Count; i++)
-                    {
-                        if (i != 0)
-                        {
-                            grafo.FirstOrDefault(v => v.Nome == vertices[0].Value.Replace(" ", ""))
-                                .Adjacencias
-                                .Add(grafo.FirstOrDefault(v => v.Nome == vertices[i].Value.Replace(" ", "")));
-                        }
-                    }
+                    var vertice1 = EncontraVertice(grafo, vertices[0].Value.Replace(" ", ""));
+                    var vertice2 = EncontraVertice(grafo, vertices[1].Value.Replace(" ", ""));
+
+                    vertice1.Adjacencias.Add(vertice2);
+                    vertice2.Adjacencias.Add(vertice1);
                 }
             }
         }
@@ -220,6 +216,7 @@ namespace TrabalhoGrafos
                         encontrado = BuscaProfundidade(vertice, nomeDoVertice);
                     }
                 }
+
                 return encontrado;
             }
         }

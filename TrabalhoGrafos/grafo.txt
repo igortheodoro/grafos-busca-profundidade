@@ -1,9 +1,11 @@
-Vertice1
-Vertice2
-Vertice3
-Vertice4
-Vertice5
-Vertice6
--
-Vertice1 Vertice2 Vertice5
-Vertice4 Vertice1 Vertice6
+6
+MINAS-GERAIS
+ITAGUARA
+SAO-PAULO
+OSASCO
+RIO-GRANDE-DO-SUL
+PELOTAS
+3
+MINAS-GERAIS ITAGUARA  
+SAO-PAULO OSASCO 
+RIO-GRANDE-DO-SUL PELOTAS 
