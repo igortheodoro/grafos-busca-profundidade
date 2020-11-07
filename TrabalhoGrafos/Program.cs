@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace TrabalhoGrafos
@@ -11,7 +10,7 @@ namespace TrabalhoGrafos
         public static List<Vertice> visitados = new List<Vertice>();
 
         private static int Menu()
-        {
+        {            
             Console.WriteLine("\n[1] - Ver grafo");
             Console.WriteLine("[2] - Verificar vértice existente");
             Console.WriteLine("[3] - Adicionar vértice");
@@ -19,6 +18,7 @@ namespace TrabalhoGrafos
             Console.WriteLine("[5] - Adicionar aresta");
             Console.WriteLine("[6] - Remover aresta");
             Console.WriteLine("[7] - Sair");
+
             Console.Write("\nDigite o número correspondente a opção que deseja: ");
             return int.Parse(Console.ReadLine());
         }
@@ -175,6 +175,10 @@ namespace TrabalhoGrafos
             }
             else
             {
+                Console.BackgroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("\nÉ importante digitar o nome do vértice corretamente, preste bastante atenção na grafia!");
+                Console.BackgroundColor = ConsoleColor.Black;
+
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.WriteLine("\n Vértice não existente!");
                 Console.BackgroundColor = ConsoleColor.Black;
